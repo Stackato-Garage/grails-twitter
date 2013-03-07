@@ -3,6 +3,8 @@ Grails Twitter application
 
 This moderately complex Twitter clone demonstrates how you can combine a standard SQL store, MongoDB, and Redis all within a single Grails application deployed on Cloud Foundry. It's pretty fast too!
 
+Originally from [Jeff Brown's](https://github.com/jeffbrown) [grails-samples](https://github.com/grails-samples/grailstwitter) repo, this version was adapted from SpringSource's [cloudfoundry-samples](https://github.com/SpringSource/cloudfoundry-samples).
+
 The messages (MongoDB)
 ----------------------
 
@@ -41,21 +43,23 @@ To run this application, make sure you have the appropriate version of Grails in
 
 This will start the application in development mode and use the local MongoDB and Redis instances plus an in-memory HSQLDB database.
 
-Deploying to Cloud Foundry
---------------------------
+Deploying to Stackato
+---------------------
 
-To save some effort, it's worth changing the name of the project before deploying to Cloud Foundry because the default URL is based on it - and grailstwitter.cloudfoundry.com is already taken! So, open the `application.properties` file in the root of the project and change the value for `app.name`, for example:
+These instructions use the [stackato](http://www.activestate.com/stackato/download_client) client rather than the Grails cloudfoundry plugin, which does not currently work with Stackato.
 
-    app.name=grailstwitter-pal
+First you need to build the .war file. This should work with Grails 2.2.0 or greater:
 
-where 'pal' could be your Cloud Foundry account name.
+    grails prod war
 
-Once that's done, the application already has the Cloud Foundry plugin configured, so all you need to do is run:
+Target a Stackato API endpoint with the client, then push:
 
-    grails prod cf-push
+    stackato push -n
 
-to deploy the application to the cloud. When it asks for a URL use the default if you changed the application name, or provide a unique *.cloudfoundry.com host name. If you don't have any services provisioned yet, the command will also ask whether you want to provision and bind them to the application. Agree for each of the MySQL, MongoDB, and Redis services.
+You can specify your own application name to override the default 'grails-twitter':
 
-That's it. As long as the application successfully deploys, you'll be able to access it via the URL you chose. If it doesn't start successfully, you will be shown the server logs so that you have some idea of what went wrong.
+    stackato push -n mytwitter
 
-For more information on the commands you can use with Cloud Foundry, check out the plugin's [user guide](http://grails-plugins.github.com/grails-cloud-foundry/docs/manual/index.html).
+
+
+
