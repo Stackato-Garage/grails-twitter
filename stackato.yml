@@ -1,0 +1,11 @@
+name: grails-twitter 
+app-dir: target
+framework:
+  type: grails
+  runtime: java7
+mem: 512M
+services:
+  ${name}-db: mysql
+  ${name}-mongo: mongodb 
+  ${name}-cache: redis 
+  ${name}-queue: rabbitmq 
