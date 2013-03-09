@@ -48,7 +48,7 @@ Deploying to Stackato
 
 These instructions use the [stackato](http://www.activestate.com/stackato/download_client) client rather than the Grails cloudfoundry plugin, which does not currently work with Stackato.
 
-First you need to build the .war file. This should work with Grails 2.2.0 or greater:
+First you need to build the .war file. To do this, you will need to install [Tomcat](http://tomcat.apache.org/download-70.cgi) and [Ant](http://ant.apache.org/), as well as set JAVA_HOME, CATALINA_HOME, and ANT_HOME. This works with Grails 2.2.0, but it should work with a greater version:
 
     grails prod war
 
